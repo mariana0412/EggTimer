@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let eggTimes = ["Soft": 5, "Medium": 7, "Hard": 10]
+    let eggTimes = ["Soft": 300, "Medium": 420, "Hard": 600]
     var countdownTimer: Timer!
     var secondsRemaining = 6
     
