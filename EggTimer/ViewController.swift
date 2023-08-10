@@ -14,14 +14,13 @@ class ViewController: UIViewController {
     var countdownTimer: Timer!
     var secondsRemaining = 6
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        startTimer()
-    }
-    
     @IBAction func hardnessPressed(_ sender: UIButton) {
         let hardness = sender.currentTitle!
         print(eggTimes[hardness]!)
+    }
+    
+    @IBAction func timerTriggered(_ sender: UIButton) {
+        startTimer()
     }
     
     func startTimer() {
