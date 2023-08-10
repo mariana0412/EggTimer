@@ -10,9 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let eggTimes = ["Soft": 5 * 60, "Medium": 7 * 60, "Hard": 10 * 60]
+    let eggTimes = ["Soft": 5, "Medium": 7 * 60, "Hard": 10 * 60]
     var timer = Timer()
     var secondsRemaining = 0
+    
+    @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func hardnessPressed(_ sender: UIButton) {
         if timer.isValid == true {
@@ -20,7 +22,6 @@ class ViewController: UIViewController {
         }
         let hardness = sender.currentTitle!
         secondsRemaining = eggTimes[hardness]!
-        let timeNeededToCook = eggTimes[hardness]!
         startTimer()
     }
     
@@ -39,5 +40,6 @@ class ViewController: UIViewController {
     
     func endTimer() {
         timer.invalidate()
+        titleLabel.text = "End"
     }
 }
