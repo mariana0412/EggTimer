@@ -11,15 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     let eggTimes = ["Soft": 300, "Medium": 420, "Hard": 600]
-    var countdownTimer: Timer!
-    var secondsRemaining = 6
+    var countdownTimer: Timer?
+    var secondsRemaining = 0
     
     @IBAction func hardnessPressed(_ sender: UIButton) {
+        if countdownTimer?.isValid == true{
+            endTimer()
+        }
         let hardness = sender.currentTitle!
-        print(eggTimes[hardness]!)
-    }
-    
-    @IBAction func timerTriggered(_ sender: UIButton) {
+        secondsRemaining = eggTimes[hardness]!
+        let timeNeededToCook = eggTimes[hardness]!
         startTimer()
     }
     
@@ -37,7 +38,6 @@ class ViewController: UIViewController {
     }
     
     func endTimer() {
-        print("Timer ended")
-        countdownTimer.invalidate()
+        countdownTimer?.invalidate()
     }
 }

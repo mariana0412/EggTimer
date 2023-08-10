@@ -51,7 +51,6 @@
                                                         <state key="normal" title="Soft"/>
                                                         <connections>
                                                             <action selector="hardnessPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fw6-El-LJr"/>
-                                                            <action selector="timerTriggered:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZPB-1u-Wwc"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
