@@ -10,12 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let eggTimes = ["Soft": 300, "Medium": 420, "Hard": 600]
-    var countdownTimer: Timer?
+    let eggTimes = ["Soft": 5 * 60, "Medium": 7 * 60, "Hard": 10 * 60]
+    var timer = Timer()
     var secondsRemaining = 0
     
     @IBAction func hardnessPressed(_ sender: UIButton) {
-        if countdownTimer?.isValid == true{
+        if timer.isValid == true {
             endTimer()
         }
         let hardness = sender.currentTitle!
@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     }
     
     func startTimer() {
-        countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     @objc func updateTimer() {
@@ -38,6 +38,6 @@ class ViewController: UIViewController {
     }
     
     func endTimer() {
-        countdownTimer?.invalidate()
+        timer.invalidate()
     }
 }
