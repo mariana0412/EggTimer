@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         countdownTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
-    @objc func updateTimer() {
+    func updateTimer() {
         if secondsRemaining > 0 {
             print(secondsRemaining)
             secondsRemaining -= 1
@@ -37,7 +37,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func endTimer() {
+    func endTimer() {
         print("Timer ended")
         countdownTimer.invalidate()
     }
