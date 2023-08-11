@@ -7,21 +7,32 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
+    let eggTimes = ["Soft": 5, "Medium": 7 * 60, "Hard": 10 * 60]
     
-    let eggTimes = ["Soft": 5 * 60, "Medium": 7 * 60, "Hard": 10 * 60]
     var timer = Timer()
-    var secondsRemaining = 0
+    var totalTime = 0
+    var secondsPassed = 0
+    
+    var player: AVAudioPlayer!
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     @IBAction func hardnessPressed(_ sender: UIButton) {
-        if timer.isValid == true {
-            timer.invalidate()
+        if timer.isValid {
+            endTimer()
         }
+        
         let hardness = sender.currentTitle!
-        secondsRemaining = eggTimes[hardness]!
+        setTitleLabel(label: hardness)
+        
+        resetProgressBar()
+        
+        totalTime = eggTimes[hardness]!
         startTimer()
     }
     
@@ -30,11 +41,33 @@ class ViewController: UIViewController {
     }
     
     @objc func updateTimer() {
-        if secondsRemaining > 0 {
-            print(secondsRemaining)
-            secondsRemaining -= 1
+        if secondsPassed < totalTime {
+            secondsPassed += 1
+            let percentageProgress = Float(secondsPassed) / Float(totalTime)
+            progressBar.setProgress(percentageProgress, animated: true)
         } else {
-            titleLabel.text = "Done"
+            endTimer()
+            playAlarmSound()
+            setTitleLabel(label: "Done!")
         }
+    }
+    
+    func endTimer() {
+        timer.invalidate()
+        secondsPassed = 0
+    }
+    
+    func resetProgressBar() {
+        progressBar.setProgress(0.0, animated: false)
+    }
+    
+    func setTitleLabel(label: String) {
+        titleLabel.text = label
+    }
+    
+    func playAlarmSound() {
+        let url = Bundle.main.url(forResource: "alarm_sound", withExtension: "mp3")
+        player = try! AVAudioPlayer(contentsOf: url!)
+        player.play()
     }
 }
