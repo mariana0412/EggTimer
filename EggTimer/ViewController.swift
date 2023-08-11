@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     @IBAction func hardnessPressed(_ sender: UIButton) {
         if timer.isValid == true {
             timer.invalidate()
@@ -23,6 +25,7 @@ class ViewController: UIViewController {
         let hardness = sender.currentTitle!
         secondsRemaining = eggTimes[hardness]!
         startTimer()
+        progressBar.setProgress(1, animated: true)
     }
     
     func startTimer() {
